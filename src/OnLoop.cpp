@@ -1,4 +1,15 @@
 
+void MoveWorm() {
+
+	switch( snake.dir ){
+		case e_DI_Up:		snake.y -= snake.velocity;	break;
+		case e_DI_Down:		snake.y += snake.velocity;	break;
+		case e_DI_Left:		snake.x -= snake.velocity;	break;
+		case e_DI_Right:	snake.x += snake.velocity;	break;
+		case e_DI_Stop:		break;
+	}
+}
+
 void OnLoop() {
 	
 	switch( state ){
@@ -10,6 +21,7 @@ void OnLoop() {
 			
 			break;
 		case e_GS_Ready:
+			snake.dir = e_DI_Left;
 			if( skipState ){
 				skipState = false;
 				state = e_GS_Game;
@@ -17,6 +29,7 @@ void OnLoop() {
 			
 			break;
 		case e_GS_Game:
+			MoveWorm();
 			if( skipState ){
 				skipState = false;
 				state = e_GS_NextLevel;

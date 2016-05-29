@@ -43,6 +43,7 @@ bool Init()
 	snake.lives = 3;
 	snake.score = 0;
 	snake.velocity = 2;
+	snake.dir = e_DI_Stop;
     
     return true;
 }

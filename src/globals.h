@@ -25,13 +25,23 @@ bool running;
 bool skipState;
 bool showDebug;
 
+enum Direction {
+	e_DI_Up,
+	e_DI_Down,
+	e_DI_Left,
+	e_DI_Right,
+	e_DI_Stop
+};
+
 struct Snake {
 	int x, y;
 	int lives;
 	int score;
 	int velocity;
-} snake;
+	Direction dir;
+};
 
+static Snake snake;
 
 enum GameState {
 	e_GS_Menu = 0,
