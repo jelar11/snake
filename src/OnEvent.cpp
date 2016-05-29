@@ -28,10 +28,10 @@ void OnEvent() {
 				case SDLK_q:	running = false;	break;
 				
 				// Snake movement
-				case SDLK_UP:		snake.dir = e_DI_Up;	break;
-				case SDLK_LEFT:		snake.dir = e_DI_Left;	break;
-				case SDLK_DOWN:		snake.dir = e_DI_Down;	break;
-				case SDLK_RIGHT:	snake.dir = e_DI_Right;	break;
+				case SDLK_UP:		snake.dir = (snake.dir != e_DI_Down ? e_DI_Up : snake.dir);		break;
+				case SDLK_LEFT:		snake.dir = (snake.dir != e_DI_Right ? e_DI_Left : snake.dir);	break;
+				case SDLK_DOWN:		snake.dir = (snake.dir != e_DI_Up ? e_DI_Down : snake.dir);		break;
+				case SDLK_RIGHT:	snake.dir = (snake.dir != e_DI_Left ? e_DI_Right : snake.dir);	break;
 
 				// Other input
 				case SDLK_d:	showDebug = !showDebug;			break;

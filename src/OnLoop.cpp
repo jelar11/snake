@@ -10,6 +10,23 @@ void MoveWorm() {
 	}
 }
 
+void Dead() {
+	if( snake.dir != e_DI_Stop ){
+		snake.lives--;
+		snake.dir = e_DI_Stop;
+	}
+}
+void CheckForCollition() {
+	// Check outer wall
+	if( (snake.x >= (BOARD_WIDTH)) ||
+		(snake.x <= 6 ) ||
+		(snake.y >= SCREEN_HEIGHT -6) ||
+		(snake.y <= 30)
+	   ){
+		Dead();
+	}
+}
+
 void OnLoop() {
 	
 	switch( state ){
@@ -21,7 +38,7 @@ void OnLoop() {
 			
 			break;
 		case e_GS_Ready:
-			snake.dir = e_DI_Left;
+			snake.dir = e_DI_Right;
 			if( skipState ){
 				skipState = false;
 				state = e_GS_Game;
@@ -30,6 +47,7 @@ void OnLoop() {
 			break;
 		case e_GS_Game:
 			MoveWorm();
+			CheckForCollition();
 			if( skipState ){
 				skipState = false;
 				state = e_GS_NextLevel;

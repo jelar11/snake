@@ -94,9 +94,12 @@ void DrawLeve() {
 }
 
 void DrawWorm() {
-	SDL_Rect fillRect = { snake.x, snake.y, 10, 10 };
-    SDL_SetRenderDrawColor( gRenderer, 0xFF, 0x00, 0x00, 0xFF );
+	SDL_Rect fillRect = { snake.x -5, snake.y -5, 10, 10 };
+	SetColor( e_C_Red );
     SDL_RenderFillRect( gRenderer, &fillRect );
+	
+	SetColor( e_C_Blue );
+	SDL_RenderDrawPoint(gRenderer, snake.x, snake.y);
 }
 
 void OnRender() {

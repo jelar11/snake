@@ -13,6 +13,8 @@
 // 	const int BRICK_SIZE     = 15;
 const int SCREEN_WIDTH  = 640;
 const int SCREEN_HEIGHT = 480;
+const int BOARD_WIDTH = SCREEN_WIDTH - 8;
+const int BOARD_HEIGHT = SCREEN_HEIGHT - 45;
 const int DELAY = 10;
 
 
