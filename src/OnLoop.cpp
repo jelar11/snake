@@ -1,3 +1,4 @@
+#include "Level.cpp"
 
 void MoveWorm() {
 
@@ -34,6 +35,7 @@ void OnLoop() {
 			if( skipState ){
 				skipState = false;
 				state = e_GS_Ready;
+				GenerateLevel();
 			}
 			
 			break;

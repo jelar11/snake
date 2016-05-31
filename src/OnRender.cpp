@@ -90,7 +90,23 @@ void DrawTopArea() {
 
 
 void DrawLeve() {
-	DrawBox(1, 22, SCREEN_WIDTH -2, SCREEN_HEIGHT -23, 4, e_C_Orange);
+	// Draws the outer border
+	DrawBox(BOARD_X, BOARD_Y, BOARD_WIDTH, BOARD_HEIGHT, 4, e_C_Orange);
+
+	// Draw random coints
+	int x, y;
+	char str[10];
+	for( int i=0; i<=n-1; i++ ){
+		SetColor( e_C_Yellow );
+		x = cordinates[i][iX] + BOARD_X;
+		y = cordinates[i][iY] + BOARD_Y;
+		SDL_Rect first = { x, y, 5, 5 };
+		SDL_RenderFillRect( gRenderer, &first );
+
+//		sprintf(str, "%d", i);
+//		DrawText(x, y, str);
+	}
+
 }
 
 void DrawWorm() {

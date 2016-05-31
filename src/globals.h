@@ -10,13 +10,18 @@
 #include <SDL2/SDL_image.h>
 
 // Constans
-// 	const int BRICK_SIZE     = 15;
+const int BRICK_SIZE     = 10;
 const int SCREEN_WIDTH  = 640;
 const int SCREEN_HEIGHT = 480;
-const int BOARD_WIDTH = SCREEN_WIDTH - 8;
-const int BOARD_HEIGHT = SCREEN_HEIGHT - 45;
+const int BOARD_WIDTH = SCREEN_WIDTH - 2;
+const int BOARD_HEIGHT = SCREEN_HEIGHT - 22;
+const int BOARD_X = 1;
+const int BOARD_Y = 21;
 const int DELAY = 10;
 
+
+#define iX 0
+#define iY 1
 
 SDL_Window    *gWindow;
 SDL_Renderer  *gRenderer;
