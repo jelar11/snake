@@ -3,7 +3,10 @@
 bool LoadMedia()
 {
 	if( (debugFont = TTF_OpenFont( "/usr/share/fonts/truetype/msttcorefonts/Courier_New_Bold.ttf", 14 )) == NULL ){
-		
+		return false;
+	}
+
+	if( (menuFont = TTF_OpenFont( "/usr/share/fonts/truetype/msttcorefonts/Courier_New_Bold.ttf", 16 )) == NULL ){
 		return false;
 	}
 

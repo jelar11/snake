@@ -23,9 +23,17 @@ const int DELAY = 10;
 #define iX 0
 #define iY 1
 
-SDL_Window    *gWindow;
-SDL_Renderer  *gRenderer;
-TTF_Font      *debugFont;
+SDL_Window		*gWindow;
+SDL_Renderer	*gRenderer;
+TTF_Font		*debugFont;
+TTF_Font		*menuFont;
+
+enum FontSizes {
+	e_FS_14 = 0,
+	e_FS_16,
+
+	e_FS_LastEnum
+};
 
 
 bool running;

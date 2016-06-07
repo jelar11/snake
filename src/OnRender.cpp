@@ -23,10 +23,16 @@ std::string str_format(const std::string fmt, ...) {
     return str;
 }
 
-void DrawText(int x, int y, std::string str, bool centerH=false) {
+void DrawText(int x, int y, std::string str, bool centerH=false, FontSizes fontSize=e_FS_14, Colors color=e_C_White) {
 
-    SDL_Color txtColor = { 0xFF, 0xFF, 0xFF };
-    SDL_Surface* txtSurf = TTF_RenderText_Solid( debugFont, str.c_str(), txtColor);
+    SDL_Color txtColor = Color( color );
+	TTF_Font *font;
+	switch( fontSize ){
+		case e_FS_14:	font = debugFont;	break;
+		case e_FS_16:	font = menuFont;	break;
+		default:	break;
+	}
+    SDL_Surface* txtSurf = TTF_RenderText_Solid( font, str.c_str(), txtColor);
 
     SDL_Texture* mTexture = SDL_CreateTextureFromSurface( gRenderer, txtSurf );
     SDL_FreeSurface( txtSurf );
@@ -80,11 +86,11 @@ void DrawBox(int x1, int y1, int x2, int y2, int width, Colors c) {
 void DrawTopArea() {
 	DrawBox(1, 1, SCREEN_WIDTH-2, 19, 2, e_C_White);
 
-	DrawText(4, 2, str_format("Score: %d", snake.score ) );
+	DrawText(4, 2, str_format("Score: %d", snake.score ), false, e_FS_16 );
 	
-	DrawText((SCREEN_WIDTH/2), 2, "snake v.0.1", true);
+	DrawText((SCREEN_WIDTH/2), 2, "snake v.0.1", true, e_FS_16);
 	
-	DrawText((SCREEN_WIDTH -70), 2, str_format("Lives: %d", snake.lives) );
+	DrawText((SCREEN_WIDTH -90), 2, str_format("Lives: %d", snake.lives), false, e_FS_16 );
 
 }
 
