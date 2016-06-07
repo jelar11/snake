@@ -37,8 +37,7 @@ bool Init()
 		return false;
 	}
 
-	state = e_GS_Menu;
-	skipState = false;
+	gameState = e_GS_Menu;
 	showDebug = false;
 
 	snake.x = SCREEN_WIDTH /2;

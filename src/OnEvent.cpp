@@ -2,12 +2,12 @@
 
 void PauseGame() {
 	
-	static GameState old_state = state;
-	if( state == e_GS_Pause ){
-		state = old_state;
+	static int old_state = gameState;
+	if( gameState == e_GS_Pause ){
+		gameState = old_state;
 	}else{
-		old_state = state;
-		state = e_GS_Pause;
+		old_state = gameState;
+		gameState = e_GS_Pause;
 	}
 }
 
@@ -40,7 +40,7 @@ void OnEvent() {
 								snake.y = SCREEN_HEIGHT /2;		break;
 								
 				case SDLK_p:	PauseGame();					break;
-				case SDLK_s:	skipState= true;				break;
+				case SDLK_s:	gameState++;					break;
 					
 				case SDLK_PLUS:		snake.velocity++;			break;
 				case SDLK_MINUS:	snake.velocity--;			break;

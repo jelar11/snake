@@ -30,37 +30,22 @@ void CheckForCollition() {
 
 void OnLoop() {
 	
-	switch( state ){
+	switch( gameState ){
 		case e_GS_Menu:
-			if( skipState ){
-				skipState = false;
-				state = e_GS_Ready;
-				GenerateLevel();
-			}
 			
 			break;
 		case e_GS_Ready:
 			snake.dir = e_DI_Right;
-			if( skipState ){
-				skipState = false;
-				state = e_GS_Game;
-			}
+			GenerateLevel();
+			gameState = e_GS_Game;
 			
 			break;
 		case e_GS_Game:
 			MoveWorm();
 			CheckForCollition();
-			if( skipState ){
-				skipState = false;
-				state = e_GS_NextLevel;
-			}
 			
 			break;
 		case e_GS_NextLevel:
-			if( skipState ){
-				skipState = false;
-				state = e_GS_Menu;
-			}
 			
 			break;
 			
@@ -68,7 +53,7 @@ void OnLoop() {
 			break;
 
 		case e_GS_LastEnum:
-			state = e_GS_Menu;
+			gameState = e_GS_Menu;
 			break;
 	}
 

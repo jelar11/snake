@@ -37,7 +37,6 @@ enum FontSizes {
 
 
 bool running;
-bool skipState;
 bool showDebug;
 
 enum Direction {
@@ -63,12 +62,15 @@ enum GameState {
 	e_GS_Ready,
 	e_GS_Game,
 	e_GS_NextLevel,
+	e_GS_GameOver,
 	e_GS_Pause,
-	
+
 	e_GS_LastEnum
 
-} state;
+};
 
-static const char * GameState_str[] ={"menu", "ready", "game", "nextLevel", "pause"};
+int gameState;
+
+static const char * GameState_str[] ={"menu", "ready", "game", "nextLevel", "gameover", "pause"};
 
 #endif
