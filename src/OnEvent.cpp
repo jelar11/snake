@@ -1,13 +1,10 @@
 #include "globals.h"
 
 void PauseGame() {
-	
-	static int old_state = gameState;
-	if( gameState == e_GS_Pause ){
-		gameState = old_state;
-	}else{
-		old_state = gameState;
+	if( e_GS_Game == gameState ){
 		gameState = e_GS_Pause;
+	}else if( e_GS_Pause == gameState ){
+		gameState = e_GS_Game;
 	}
 }
 
@@ -38,14 +35,14 @@ void OnEvent() {
 
 				case SDLK_j:	snake.x = SCREEN_WIDTH /2;
 								snake.y = SCREEN_HEIGHT /2;		break;
-								
+
+				case SDLK_SPACE:
 				case SDLK_p:	PauseGame();					break;
 				case SDLK_s:	gameState++;					break;
 					
 				case SDLK_PLUS:		snake.velocity++;			break;
 				case SDLK_MINUS:	snake.velocity--;			break;
-					
-			
+
 				default:
 //					printf("Key pressed: %d\n", event.key.keysym.sym );
 				break;

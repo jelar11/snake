@@ -87,9 +87,9 @@ void DrawTopArea() {
 	DrawBox(1, 1, SCREEN_WIDTH-2, 19, 2, e_C_White);
 
 	DrawText(4, 2, str_format("Score: %d", snake.score ), false, e_FS_16 );
-	
-	DrawText((SCREEN_WIDTH/2), 2, "snake v.0.1", true, e_FS_16);
-	
+
+	DrawText((SCREEN_WIDTH/2), 2, (e_GS_Pause == gameState  ? "- Pause -" : "snake v.0.1"), true, e_FS_16);
+
 	DrawText((SCREEN_WIDTH -90), 2, str_format("Lives: %d", snake.lives), false, e_FS_16 );
 
 }
