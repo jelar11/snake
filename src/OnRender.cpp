@@ -142,6 +142,31 @@ void DrawMenu() {
 	}
 }
 
+void DrawHighScore() {
+	int x = SCREEN_WIDTH/2;
+	int y = 80;
+	DrawText(x, y, "HighScore", true, e_FS_16, e_C_Blue );
+	y += 18;
+	DrawText(x, y, "-------------------", true, e_FS_16 );
+	y += 18;
+	x -= 90;
+	std::string str;
+	for( int i=0; i<6; i++ ){
+		int pos = highScore[i].find(",");
+		std::string name = highScore[i].substr(0, pos);
+		int score = atoi( highScore[i].substr(pos +1, highScore[i].length() ).c_str() );
+		if( name.empty() )
+			str = str_format("%d. ---", i +1 );
+		else
+			str = str_format("%d. %s      %d", i +1, name.c_str(), score );
+		DrawText(x, y, str, false, e_FS_16);
+		y += 18;
+	}
+	y += 18;
+	x = SCREEN_WIDTH/2;
+	DrawText(x, y, "> Back <", true, e_FS_16, e_C_Yellow );
+}
+
 void OnRender() {
 	// Clear screen
 	SetColor( e_C_Back );
@@ -153,6 +178,9 @@ void OnRender() {
 	switch( gameState ){
 		case e_GS_Menu:
 			DrawMenu();
+		break;
+		case e_GS_HighScore:
+			DrawHighScore();
 		break;
 		case e_GS_Pause:
 		case e_GS_Game:

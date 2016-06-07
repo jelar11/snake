@@ -2,6 +2,10 @@
 #define FUNCTIONS_H
 
 #include <stdio.h>
+#include <fstream>
+#include <iostream>
+
+using namespace std;
 
 enum Colors {
 	e_C_Black		= 0x000000,
@@ -34,6 +38,38 @@ SDL_Color Color(Colors c) {
 	
 	SDL_Color color = {r,g,b};
 	return color;
+}
+
+void LoadHighScore() {
+	ifstream f;
+	f.open("highscore.dat", ifstream::in);
+	if( f.is_open() )
+		{
+		f.seekg(ios::beg);
+		std::string line;
+		int i=0;
+		while( getline(f, line) ){
+			highScore[i++] = line;
+		}
+		f.close();
+	}else{
+		printf("Highscore file not found.\n");
+	}
+	
+}
+
+void SaveHighSCore() {
+	
+	ofstream f;
+	f.open("highscore.dat", ofstream::out );
+	if( f.is_open() ){
+		for( int i=0; i<6; i++ ){
+			if( ! highScore[i].empty() ){
+				f << highScore[i] << "\n";
+			}
+		}
+		f.close();
+	}
 }
 
 #endif

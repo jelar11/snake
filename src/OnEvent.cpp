@@ -57,6 +57,8 @@ void OnEvent() {
 				case SDLK_RETURN:
 					if( e_GS_Menu == gameState ){
 						MenuAction();
+					}else if( e_GS_HighScore == gameState ){
+						gameState = e_GS_Menu;
 					}
 				break;
 				case SDLK_d:	showDebug = !showDebug;			break;

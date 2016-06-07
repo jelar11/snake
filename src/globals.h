@@ -33,6 +33,7 @@ int gameState;
 int menuState;
 bool running;
 bool showDebug;
+std::string highScore[6];
 
 enum FontSizes {
 	e_FS_14 = 0,
