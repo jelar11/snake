@@ -1,2 +1,3 @@
 # snake
-My verson of the clasic game
+My verson of the classic snake game
+
