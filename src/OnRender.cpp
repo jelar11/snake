@@ -101,16 +101,12 @@ void DrawLeve() {
 
 	// Draw random coints
 	int x, y;
-	char str[10];
 	for( int i=0; i<=n-1; i++ ){
 		SetColor( e_C_Yellow );
 		x = cordinates[i][iX] + BOARD_X;
 		y = cordinates[i][iY] + BOARD_Y;
 		SDL_Rect first = { x, y, 5, 5 };
 		SDL_RenderFillRect( gRenderer, &first );
-
-//		sprintf(str, "%d", i);
-//		DrawText(x, y, str);
 	}
 
 }
