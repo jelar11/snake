@@ -132,10 +132,26 @@ void OnRender() {
 	// draw top area
 	DrawTopArea();
 	
-	DrawLeve();
-	
-	// draw the wrom
-	DrawWorm();
+	switch( gameState ){
+		case e_GS_Menu:
+		break;
+
+		case e_GS_Pause:
+		case e_GS_Game:
+			DrawLeve();
+			// draw the wrom
+			DrawWorm();
+
+		break;
+		case e_GS_GameOver:
+		break;
+		case e_GS_NextLevel:
+		break;
+		case e_GS_Ready:
+		break;
+		default:
+		break;
+	}
 
 	// draw Debug text
 	if( showDebug ){
