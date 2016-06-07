@@ -8,6 +8,20 @@ void PauseGame() {
 	}
 }
 
+void MenuAction() {
+	switch( menuState ){
+		case e_MS_StartGame:
+			gameState = e_GS_Ready;
+			break;
+		case e_MS_HighScore:
+			gameState = e_GS_HighScore;
+			break;
+		case e_MS_Exit:
+			exit(0);
+		break;
+	}
+}
+
 void OnEvent() {
 	SDL_Event event;
 	while(SDL_PollEvent(&event)) {
@@ -25,12 +39,26 @@ void OnEvent() {
 				case SDLK_q:	running = false;	break;
 				
 				// Snake movement
-				case SDLK_UP:		snake.dir = (snake.dir != e_DI_Down ? e_DI_Up : snake.dir);		break;
+				case SDLK_UP:
+					snake.dir = (snake.dir != e_DI_Down ? e_DI_Up : snake.dir);
+					if( e_GS_Menu == gameState )	menuState--;
+					if( menuState < 0)	menuState = e_MS_Exit;
+
+				break;
 				case SDLK_LEFT:		snake.dir = (snake.dir != e_DI_Right ? e_DI_Left : snake.dir);	break;
-				case SDLK_DOWN:		snake.dir = (snake.dir != e_DI_Up ? e_DI_Down : snake.dir);		break;
+				case SDLK_DOWN:
+					snake.dir = (snake.dir != e_DI_Up ? e_DI_Down : snake.dir);
+					if( e_GS_Menu == gameState )	menuState++;
+					if( menuState >= e_MS_LastEnum )	menuState = e_MS_StartGame;
+				break;
 				case SDLK_RIGHT:	snake.dir = (snake.dir != e_DI_Left ? e_DI_Right : snake.dir);	break;
 
 				// Other input
+				case SDLK_RETURN:
+					if( e_GS_Menu == gameState ){
+						MenuAction();
+					}
+				break;
 				case SDLK_d:	showDebug = !showDebug;			break;
 
 				case SDLK_j:	snake.x = SCREEN_WIDTH /2;

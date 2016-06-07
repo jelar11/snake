@@ -124,6 +124,28 @@ void DrawWorm() {
 	SDL_RenderDrawPoint(gRenderer, snake.x, snake.y);
 }
 
+void DrawMenu() {
+	int x = SCREEN_WIDTH/2;
+	int y = 80;
+	DrawText(x, y, "Menu", true, e_FS_16);
+	y += 18;
+	DrawText(x, y, "--------------", true, e_FS_16 );
+	y += 18;
+	Colors c = e_C_White;
+	std::string str;
+	for( int i=0; i<e_MS_LastEnum; i++ ){
+		if( menuState == i ){
+			c = e_C_Yellow;
+			str = str_format("> %s <", MenuStates_str[i] );
+		}else{
+			c = e_C_White;
+			str = MenuStates_str[i];
+		}
+		DrawText(x, y, str, true, e_FS_16, c);
+		y += 18;
+	}
+}
+
 void OnRender() {
 	// Clear screen
 	SetColor( e_C_Back );
@@ -134,8 +156,8 @@ void OnRender() {
 	
 	switch( gameState ){
 		case e_GS_Menu:
+			DrawMenu();
 		break;
-
 		case e_GS_Pause:
 		case e_GS_Game:
 			DrawLeve();

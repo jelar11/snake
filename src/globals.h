@@ -64,13 +64,22 @@ enum GameState {
 	e_GS_NextLevel,
 	e_GS_GameOver,
 	e_GS_Pause,
+	e_GS_HighScore,
 
 	e_GS_LastEnum
 
 };
-
 int gameState;
+static const char * GameState_str[] ={"menu", "ready", "game", "nextLevel", "gameover", "pause", "highscore"};
 
-static const char * GameState_str[] ={"menu", "ready", "game", "nextLevel", "gameover", "pause"};
+enum MenuStates {
+	e_MS_StartGame = 0,
+	e_MS_HighScore,
+	e_MS_Exit,
+
+	e_MS_LastEnum
+};
+int menuState;
+static const char * MenuStates_str[]={"Start game", "High score", "Exit"};
 
 #endif

@@ -38,6 +38,7 @@ bool Init()
 	}
 
 	gameState = e_GS_Menu;
+	menuState = e_MS_StartGame;
 	showDebug = false;
 
 	snake.x = SCREEN_WIDTH /2;
