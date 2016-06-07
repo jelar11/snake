@@ -23,10 +23,16 @@ const int DELAY = 10;
 #define iX 0
 #define iY 1
 
+// Global variables
 SDL_Window		*gWindow;
 SDL_Renderer	*gRenderer;
 TTF_Font		*debugFont;
 TTF_Font		*menuFont;
+
+int gameState;
+int menuState;
+bool running;
+bool showDebug;
 
 enum FontSizes {
 	e_FS_14 = 0,
@@ -34,10 +40,6 @@ enum FontSizes {
 
 	e_FS_LastEnum
 };
-
-
-bool running;
-bool showDebug;
 
 enum Direction {
 	e_DI_Up,
@@ -69,7 +71,6 @@ enum GameState {
 	e_GS_LastEnum
 
 };
-int gameState;
 static const char * GameState_str[] ={"menu", "ready", "game", "nextLevel", "gameover", "pause", "highscore"};
 
 enum MenuStates {
@@ -79,7 +80,6 @@ enum MenuStates {
 
 	e_MS_LastEnum
 };
-int menuState;
 static const char * MenuStates_str[]={"Start game", "High score", "Exit"};
 
 #endif
