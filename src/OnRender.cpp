@@ -54,6 +54,7 @@ void DrawDebugText() {
 	lines.push_back( str_format("State: %s", GameState_str[gameState]) );
 	lines.push_back( str_format("Pos (x,y): %d, %d", snake.x, snake.y) );
 	lines.push_back( str_format("Velocity: %d", snake.velocity) );
+	lines.push_back( str_format("Direction: %s", Direction_str[snake.dir]) );
 
 	SDL_Surface* txtSurf = TTF_RenderText_Solid( debugFont, "Txt", Color(e_C_Orange) );
 	int h = txtSurf->h;

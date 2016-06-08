@@ -17,7 +17,7 @@ void MenuAction() {
 			gameState = e_GS_HighScore;
 			break;
 		case e_MS_Exit:
-			exit(0);
+			running = false;
 		break;
 	}
 }
@@ -40,16 +40,22 @@ void OnEvent() {
 				
 				// Snake movement
 				case SDLK_UP:
-					snake.dir = (snake.dir != e_DI_Down ? e_DI_Up : snake.dir);
-					if( e_GS_Menu == gameState )	menuState--;
-					if( menuState < 0)	menuState = e_MS_Exit;
+					if( e_GS_Menu != gameState ){
+						snake.dir = (snake.dir != e_DI_Down ? e_DI_Up : snake.dir);
+					}else{
+						menuState--;
+						if( menuState < 0)	menuState = e_MS_Exit;
+					}
 
 				break;
 				case SDLK_LEFT:		snake.dir = (snake.dir != e_DI_Right ? e_DI_Left : snake.dir);	break;
 				case SDLK_DOWN:
-					snake.dir = (snake.dir != e_DI_Up ? e_DI_Down : snake.dir);
-					if( e_GS_Menu == gameState )	menuState++;
-					if( menuState >= e_MS_LastEnum )	menuState = e_MS_StartGame;
+					if( e_GS_Menu != gameState ){
+						snake.dir = (snake.dir != e_DI_Up ? e_DI_Down : snake.dir);
+					}else{
+						menuState++;
+						if( menuState >= e_MS_LastEnum )	menuState = e_MS_StartGame;
+					}
 				break;
 				case SDLK_RIGHT:	snake.dir = (snake.dir != e_DI_Left ? e_DI_Right : snake.dir);	break;
 

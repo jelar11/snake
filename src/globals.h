@@ -50,6 +50,8 @@ enum Direction {
 	e_DI_Stop
 };
 
+static const char * Direction_str[] = { "Up", "Down", "Left", "Right", "Stop"};
+
 struct Snake {
 	int x, y;
 	int lives;
