@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <map>
 
 // SDL
 #include <SDL2/SDL.h>
@@ -26,6 +27,8 @@ const int DELAY = 10;
 // Global variables
 SDL_Window		*gWindow;
 SDL_Renderer	*gRenderer;
+
+std::map<int, TTF_Font*> fonts;
 TTF_Font		*debugFont;
 TTF_Font		*menuFont;
 
@@ -38,9 +41,12 @@ std::string highScore[6];
 enum FontSizes {
 	e_FS_14 = 0,
 	e_FS_16,
+	e_FS_18,
 
 	e_FS_LastEnum
 };
+
+static const int FontSizes_nums[] = {14, 16, 18} ;
 
 enum Direction {
 	e_DI_Up,

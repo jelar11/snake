@@ -2,13 +2,14 @@
 
 bool LoadMedia()
 {
-	if( (debugFont = TTF_OpenFont( "/usr/share/fonts/truetype/msttcorefonts/Courier_New_Bold.ttf", 14 )) == NULL ){
-		return false;
+	for( int i=0; i<e_FS_LastEnum; i++ ){
+		if( (fonts[ i ] = TTF_OpenFont( "/usr/share/fonts/truetype/msttcorefonts/Courier_New_Bold.ttf", FontSizes_nums[i])) == NULL ){
+			return false;
+		}
 	}
-
-	if( (menuFont = TTF_OpenFont( "/usr/share/fonts/truetype/msttcorefonts/Courier_New_Bold.ttf", 16 )) == NULL ){
-		return false;
-	}
+	
+	debugFont = fonts[ e_FS_14 ];
+	menuFont = fonts[ e_FS_16 ];
 
 	return true;
 }
@@ -54,6 +55,10 @@ bool Init()
 
 void CleanUp()
 {
+	for( int i=0; i<e_FS_LastEnum; i++ ){
+		TTF_CloseFont( fonts[i] );
+	}
+	
 	 TTF_Quit();
 	 IMG_Quit();
 	 SDL_Quit();

@@ -26,12 +26,7 @@ std::string str_format(const std::string fmt, ...) {
 void DrawText(int x, int y, std::string str, bool centerH=false, FontSizes fontSize=e_FS_14, Colors color=e_C_White) {
 
     SDL_Color txtColor = Color( color );
-	TTF_Font *font;
-	switch( fontSize ){
-		case e_FS_14:	font = debugFont;	break;
-		case e_FS_16:	font = menuFont;	break;
-		default:	break;
-	}
+	TTF_Font *font = fonts[ fontSize ];
     SDL_Surface* txtSurf = TTF_RenderText_Solid( font, str.c_str(), txtColor);
 
     SDL_Texture* mTexture = SDL_CreateTextureFromSurface( gRenderer, txtSurf );
