@@ -48,6 +48,7 @@ bool Init()
 	snake.score = 0;
 	snake.velocity = 2;
 	snake.dir = e_DI_Stop;
+	snake.nextCoint = 0;
     
     return true;
 }

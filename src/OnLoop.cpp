@@ -15,8 +15,20 @@ void Dead() {
 	if( snake.dir != e_DI_Stop ){
 		snake.lives--;
 		snake.dir = e_DI_Stop;
+		gameState = e_GS_GameOver;
 	}
 }
+
+void NewGame() {
+	snake.x = SCREEN_WIDTH /2;
+	snake.y = SCREEN_HEIGHT /2;
+	snake.lives = 3;
+	snake.score = 0;
+	snake.velocity = 2;
+	snake.dir = e_DI_Right;
+	snake.nextCoint = 0;
+}
+
 void CheckForCollition() {
 	// Check outer wall
 	if( ((snake.x +10) >= (BOARD_X + BOARD_WIDTH)) ||
@@ -38,6 +50,9 @@ void CheckForCollition() {
 			gameState = e_GS_NextLevel;
 		}
 		snake.score += 10;
+		if( (snake.score % 20) == 0 ){
+			snake.velocity++;
+		}
 	}
 }
 
@@ -48,9 +63,9 @@ void OnLoop() {
 			
 			break;
 		case e_GS_Ready:
-			snake.dir = e_DI_Right;
+			NewGame();
+
 			GenerateLevel();
-			snake.nextCoint = 0;
 			gameState = e_GS_Game;
 			
 			break;

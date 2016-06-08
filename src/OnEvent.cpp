@@ -63,7 +63,7 @@ void OnEvent() {
 				case SDLK_RETURN:
 					if( e_GS_Menu == gameState ){
 						MenuAction();
-					}else if( e_GS_HighScore == gameState ){
+					}else if( e_GS_HighScore == gameState || e_GS_GameOver == gameState ){
 						gameState = e_GS_Menu;
 					}
 				break;

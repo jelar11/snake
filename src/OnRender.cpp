@@ -163,6 +163,16 @@ void DrawHighScore() {
 	DrawText(x, y, "> Back <", true, e_FS_16, e_C_Yellow );
 }
 
+void DrawGameOVer() {
+	int x = BOARD_X + (BOARD_WIDTH/2);
+	int y = (SCREEN_HEIGHT /2) - 50;
+	DrawText(x, y, "Game over", true, e_FS_18 );
+
+	y = 242;
+	x = SCREEN_WIDTH/2;
+	DrawText(x, y, "> Menu <", true, e_FS_16, e_C_Yellow );
+}
+
 void OnRender() {
 	// Clear screen
 	SetColor( e_C_Back );
@@ -186,6 +196,7 @@ void OnRender() {
 
 		break;
 		case e_GS_GameOver:
+			DrawGameOVer();
 		break;
 		case e_GS_NextLevel:
 		break;
