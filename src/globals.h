@@ -58,6 +58,7 @@ struct Snake {
 	int score;
 	int velocity;
 	Direction dir;
+	int nextCoint;
 };
 
 static Snake snake;

@@ -19,12 +19,25 @@ void Dead() {
 }
 void CheckForCollition() {
 	// Check outer wall
-	if( (snake.x >= (BOARD_WIDTH)) ||
-		(snake.x <= 6 ) ||
-		(snake.y >= SCREEN_HEIGHT -6) ||
-		(snake.y <= 30)
+	if( ((snake.x +10) >= (BOARD_X + BOARD_WIDTH)) ||
+		((snake.x -10) <= (BOARD_X ) ) ||
+		((snake.y +10) >= (BOARD_Y + BOARD_HEIGHT) ) ||
+		((snake.y -10) <= (BOARD_Y) )
 	   ){
 		Dead();
+	}
+
+	int x = cordinates[ snake.nextCoint ][iX] + BOARD_X;
+	int y = cordinates[ snake.nextCoint ][iY] + BOARD_Y;
+
+	if( ((snake.x +5) >= x && (snake.x -5) <= (x +5)) &&
+		((snake.y +5) >= y && (snake.y -5) <= (y +5))
+	) {
+		snake.nextCoint++;
+		if( snake.nextCoint >= 10 ){
+			gameState = e_GS_NextLevel;
+		}
+		snake.score += 10;
 	}
 }
 
@@ -37,6 +50,7 @@ void OnLoop() {
 		case e_GS_Ready:
 			snake.dir = e_DI_Right;
 			GenerateLevel();
+			snake.nextCoint = 0;
 			gameState = e_GS_Game;
 			
 			break;
