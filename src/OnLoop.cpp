@@ -31,11 +31,11 @@ void NewGame() {
 
 void CheckForCollition() {
 	// Check outer wall
-	if( ((snake.x +10) >= (BOARD_X + BOARD_WIDTH)) ||
-		((snake.x -10) <= (BOARD_X ) ) ||
-		((snake.y +10) >= (BOARD_Y + BOARD_HEIGHT) ) ||
-		((snake.y -10) <= (BOARD_Y) )
-	   ){
+	if( ((snake.x +10) >= (BOARD_X + BOARD_WIDTH) +1) ||
+		((snake.x -10) <= (BOARD_X +1) ) ||
+		((snake.y +10) >= (BOARD_Y + BOARD_HEIGHT +1) ) ||
+		((snake.y -10) <= (BOARD_Y-1) )
+		){
 		Dead();
 	}
 
