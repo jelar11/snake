@@ -33,6 +33,8 @@ bool Init()
     if( (gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED)) == NULL ){
         return false;
     }
+
+	SDL_ShowCursor(SDL_DISABLE);
     
     if( ! LoadMedia() ){
 		return false;

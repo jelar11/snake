@@ -2,26 +2,6 @@
 #include <stdarg.h>
 #include "functions.h"
 
-std::string str_format(const std::string fmt, ...) {
-    int size = ((int)fmt.size()) * 2 + 50;   // Use a rubric appropriate for your code
-    std::string str;
-    va_list ap;
-    while (1) {     // Maximum two passes on a POSIX system...
-        str.resize(size);
-        va_start(ap, fmt);
-        int n = vsnprintf((char *)str.data(), size, fmt.c_str(), ap);
-        va_end(ap);
-        if (n > -1 && n < size) {  // Everything worked
-            str.resize(n);
-            return str;
-        }
-        if (n > -1)  // Needed size returned
-            size = n + 1;   // For null char
-        else
-            size *= 2;      // Guess at a larger size (OS specific)
-    }
-    return str;
-}
 
 void DrawText(int x, int y, std::string str, bool centerH=false, FontSizes fontSize=e_FS_14, Colors color=e_C_White) {
 
@@ -110,8 +90,8 @@ void DrawLeve() {
 void DrawWorm() {
 	SDL_Rect fillRect = { snake.x -5, snake.y -5, 10, 10 };
 	SetColor( e_C_Red );
-    SDL_RenderFillRect( gRenderer, &fillRect );
-	
+	SDL_RenderFillRect( gRenderer, &fillRect );
+
 	SetColor( e_C_Blue );
 	SDL_RenderDrawPoint(gRenderer, snake.x, snake.y);
 }
@@ -196,7 +176,13 @@ void OnRender() {
 
 		break;
 		case e_GS_GameOver:
-			DrawGameOVer();
+			if( snake.lives > 0 ){
+				snake.x = SCREEN_WIDTH /2;
+				snake.y = SCREEN_HEIGHT /2;
+
+				gameState = e_GS_Game;
+			}else
+				DrawGameOVer();
 		break;
 		case e_GS_NextLevel:
 		break;
