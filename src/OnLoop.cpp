@@ -2,56 +2,57 @@
 
 void MoveWorm() {
 
-	switch( snake.dir ){
-		case e_DI_Up:		snake.y -= snake.velocity;	break;
-		case e_DI_Down:		snake.y += snake.velocity;	break;
-		case e_DI_Left:		snake.x -= snake.velocity;	break;
-		case e_DI_Right:	snake.x += snake.velocity;	break;
+	switch( snake->dir ){
+		case e_DI_Up:		snake->y -= snake->velocity;	break;
+		case e_DI_Down:		snake->y += snake->velocity;	break;
+		case e_DI_Left:		snake->x -= snake->velocity;	break;
+		case e_DI_Right:	snake->x += snake->velocity;	break;
 		case e_DI_Stop:		break;
 	}
+
 }
 
 void Dead() {
-	if( snake.dir != e_DI_Stop ){
-		snake.lives--;
-		snake.dir = e_DI_Stop;
+	if( snake->dir != e_DI_Stop ){
+		snake->lives--;
+		snake->dir = e_DI_Stop;
 		gameState = e_GS_GameOver;
 	}
 }
 
 void NewGame() {
-	snake.x = SCREEN_WIDTH /2;
-	snake.y = SCREEN_HEIGHT /2;
-	snake.lives = 3;
-	snake.score = 0;
-	snake.velocity = 2;
-	snake.dir = e_DI_Right;
-	snake.nextCoint = 0;
+	snake->x = SCREEN_WIDTH /2;
+	snake->y = SCREEN_HEIGHT /2;
+	snake->lives = 3;
+	snake->score = 0;
+	snake->velocity = 2;
+	snake->dir = e_DI_Right;
+	snake->nextCoint = 0;
 }
 
 void CheckForCollition() {
 	// Check outer wall
-	if( ((snake.x +10) >= (BOARD_X + BOARD_WIDTH) +1) ||
-		((snake.x -10) <= (BOARD_X +1) ) ||
-		((snake.y +10) >= (BOARD_Y + BOARD_HEIGHT +1) ) ||
-		((snake.y -10) <= (BOARD_Y-1) )
+	if( ((snake->x +10) >= (BOARD_X + BOARD_WIDTH) +1) ||
+		((snake->x -10) <= (BOARD_X +1) ) ||
+		((snake->y +10) >= (BOARD_Y + BOARD_HEIGHT +1) ) ||
+		((snake->y -10) <= (BOARD_Y-1) )
 		){
 		Dead();
 	}
 
-	int x = cordinates[ snake.nextCoint ][iX] + BOARD_X;
-	int y = cordinates[ snake.nextCoint ][iY] + BOARD_Y;
+	int x = cordinates[ snake->nextCoint ][iX] + BOARD_X;
+	int y = cordinates[ snake->nextCoint ][iY] + BOARD_Y;
 
-	if( ((snake.x +5) >= x && (snake.x -5) <= (x +5)) &&
-		((snake.y +5) >= y && (snake.y -5) <= (y +5))
+	if( ((snake->x +5) >= x && (snake->x -5) <= (x +5)) &&
+		((snake->y +5) >= y && (snake->y -5) <= (y +5))
 	) {
-		snake.nextCoint++;
-		if( snake.nextCoint >= 10 ){
+		snake->nextCoint++;
+		if( snake->nextCoint >= 10 ){
 			gameState = e_GS_NextLevel;
 		}
-		snake.score += 10;
-		if( (snake.score % 20) == 0 ){
-			snake.velocity++;
+		snake->score += 10;
+		if( (snake->score % 20) == 0 ){
+			snake->velocity++;
 		}
 	}
 }

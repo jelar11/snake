@@ -27,9 +27,9 @@ void DrawDebugText() {
 	std::vector<std::string> lines;
 
 	lines.push_back( str_format("State: %s", GameState_str[gameState]) );
-	lines.push_back( str_format("Pos (x,y): %d, %d", snake.x, snake.y) );
-	lines.push_back( str_format("Velocity: %d", snake.velocity) );
-	lines.push_back( str_format("Direction: %s", Direction_str[snake.dir]) );
+	lines.push_back( str_format("Pos (x,y): %d, %d", snake->x, snake->y) );
+	lines.push_back( str_format("Velocity: %d", snake->velocity) );
+	lines.push_back( str_format("Direction: %s", Direction_str[snake->dir]) );
 
 	SDL_Surface* txtSurf;
 	int w = 0;
@@ -63,11 +63,11 @@ void DrawBox(int x1, int y1, int x2, int y2, int width, Colors c) {
 void DrawTopArea() {
 	DrawBox(1, 1, SCREEN_WIDTH-2, 19, 2, e_C_White);
 
-	DrawText(4, 2, str_format("Score: %d", snake.score ), false, e_FS_16 );
+	DrawText(4, 2, str_format("Score: %d", snake->score ), false, e_FS_16 );
 
 	DrawText((SCREEN_WIDTH/2), 2, (e_GS_Pause == gameState  ? "- Pause -" : "snake v.0.1"), true, e_FS_16);
 
-	DrawText((SCREEN_WIDTH -90), 2, str_format("Lives: %d", snake.lives), false, e_FS_16 );
+	DrawText((SCREEN_WIDTH -90), 2, str_format("Lives: %d", snake->lives), false, e_FS_16 );
 
 }
 
@@ -78,7 +78,7 @@ void DrawLeve() {
 
 	// Draw random coints
 	int x, y;
-	int i = snake.nextCoint;
+	int i = snake->nextCoint;
 	SetColor( e_C_Yellow );
 	x = cordinates[i][iX] + BOARD_X;
 	y = cordinates[i][iY] + BOARD_Y;
@@ -88,13 +88,38 @@ void DrawLeve() {
 
 }
 
-void DrawWorm() {
-	SDL_Rect fillRect = { snake.x -5, snake.y -5, 10, 10 };
+void DrawWormSimple() {
+	SDL_Rect fillRect = { snake->x -5, snake->y -5, 10, 10 };
 	SetColor( e_C_Red );
 	SDL_RenderFillRect( gRenderer, &fillRect );
 
 	SetColor( e_C_Blue );
-	SDL_RenderDrawPoint(gRenderer, snake.x, snake.y);
+	SDL_RenderDrawPoint(gRenderer, snake->x, snake->y);
+}
+
+void DrawWorm() {
+	SDL_Rect fillRect = { snake->x -5, snake->y -5, 10, 10 };
+	SetColor( e_C_Blue );
+	SDL_RenderFillRect( gRenderer, &fillRect );
+
+	SetColor( e_C_Red );
+	int x = snake->x;
+	int y = snake->y;
+	for( int i=0; i<10; i++ ){
+		switch( snake->dir ){
+			case e_DI_Right:	x -= 12;	break;
+			case e_DI_Left:		x += 12;	break;
+			case e_DI_Up:		y += 12;	break;
+			case e_DI_Down:		y -= 12;	break;
+			default:	break;
+		}
+
+		SDL_Rect r = { x -5, y -5, 10, 10 };
+		SDL_RenderFillRect( gRenderer, &r );
+	}
+
+	SetColor( e_C_Yellow );
+	SDL_RenderDrawPoint(gRenderer, snake->x, snake->y);
 }
 
 void DrawMenu() {
@@ -177,9 +202,9 @@ void OnRender() {
 
 		break;
 		case e_GS_GameOver:
-			if( snake.lives > 0 ){
-				snake.x = SCREEN_WIDTH /2;
-				snake.y = SCREEN_HEIGHT /2;
+			if( snake->lives > 0 ){
+				snake->x = SCREEN_WIDTH /2;
+				snake->y = SCREEN_HEIGHT /2;
 
 				gameState = e_GS_Game;
 			}else

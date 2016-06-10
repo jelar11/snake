@@ -41,13 +41,7 @@ bool Init()
 	menuState = e_MS_StartGame;
 	showDebug = false;
 
-	snake.x = SCREEN_WIDTH /2;
-	snake.y = SCREEN_HEIGHT /2;
-	snake.lives = 3;
-	snake.score = 0;
-	snake.velocity = 2;
-	snake.dir = e_DI_Stop;
-	snake.nextCoint = 0;
+	snake = new Snake();
     
     return true;
 }

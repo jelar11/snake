@@ -57,6 +57,15 @@ enum Direction {
 static const char * Direction_str[] = { "Up", "Down", "Left", "Right", "Stop"};
 
 struct Snake {
+	Snake():
+		x(SCREEN_WIDTH /2), y(SCREEN_WIDTH/2),
+		lives(3),
+		score(0),
+		velocity(2),
+		dir(e_DI_Stop),
+		nextCoint(0),
+		{}
+
 	int x, y;
 	int lives;
 	int score;
@@ -65,7 +74,7 @@ struct Snake {
 	int nextCoint;
 };
 
-static Snake snake;
+Snake *snake;
 
 enum GameState {
 	e_GS_Menu = 0,
