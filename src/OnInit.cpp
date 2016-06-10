@@ -7,9 +7,6 @@ bool LoadMedia()
 			return false;
 		}
 	}
-	
-	debugFont = fonts[ e_FS_14 ];
-	menuFont = fonts[ e_FS_16 ];
 
 	return true;
 }

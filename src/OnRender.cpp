@@ -31,21 +31,22 @@ void DrawDebugText() {
 	lines.push_back( str_format("Velocity: %d", snake.velocity) );
 	lines.push_back( str_format("Direction: %s", Direction_str[snake.dir]) );
 
-	SDL_Surface* txtSurf = TTF_RenderText_Solid( debugFont, "Txt", Color(e_C_Orange) );
-	int h = txtSurf->h;
+	SDL_Surface* txtSurf;
 	int w = 0;
 	int x = 20;
 	int y = 100;
+	int boxH = 0;
 	int count = (int)lines.size();
 	for( int i=0; i<count; i++ ){
-		DrawText(x, y, lines[i].c_str(), false);
-		txtSurf = TTF_RenderText_Solid( debugFont, lines[i].c_str(), Color(e_C_Orange) );
+		DrawText(x, y, lines[i].c_str(), false, e_FS_14);
+		txtSurf = TTF_RenderText_Solid( fonts[ e_FS_14 ], lines[i].c_str(), Color(e_C_Orange) );
 		w = ((txtSurf->w >= w ) ? txtSurf->w : w);
-		y += h;
+		y += txtSurf->h;
+		boxH += txtSurf->h;
 	}
 
 	SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xA5, 0x00, 0xFF );
-	SDL_Rect rect_r = { 18, 98, 18 + w , (h*count)+2};
+	SDL_Rect rect_r = { 18, 98, 18 + w , boxH +2 };
 	SDL_RenderDrawRect( gRenderer, &rect_r );
 }
 

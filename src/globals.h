@@ -29,8 +29,6 @@ SDL_Window		*gWindow;
 SDL_Renderer	*gRenderer;
 
 std::map<int, TTF_Font*> fonts;
-TTF_Font		*debugFont;
-TTF_Font		*menuFont;
 
 int gameState;
 int menuState;
