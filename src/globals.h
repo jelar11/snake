@@ -63,7 +63,7 @@ struct Snake {
 		score(0),
 		velocity(2),
 		dir(e_DI_Stop),
-		nextCoint(0),
+		nextCoint(0)
 		{}
 
 	int x, y;
