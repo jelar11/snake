@@ -35,6 +35,7 @@ int menuState;
 bool running;
 bool showDebug;
 std::string highScore[6];
+float avgFPS;
 
 enum FontSizes {
 	e_FS_14 = 0,

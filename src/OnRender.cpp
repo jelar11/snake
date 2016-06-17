@@ -26,6 +26,7 @@ void DrawText(int x, int y, std::string str, bool centerH=false, FontSizes fontS
 void DrawDebugText() {
 	std::vector<std::string> lines;
 
+	lines.push_back( str_format("FSP: %.02f", avgFPS) );
 	lines.push_back( str_format("State: %s", GameState_str[gameState]) );
 	lines.push_back( str_format("Pos (x,y): %d, %d", snake->x, snake->y) );
 	lines.push_back( str_format("Velocity: %d", snake->velocity) );
