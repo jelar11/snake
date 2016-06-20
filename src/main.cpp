@@ -6,7 +6,6 @@
 #include "OnRender.cpp"
 
 #include "LTimer/LTimer.h"
-#include <sstream>
 
 const int SCREEN_FPS = 40;
 const int SCREEN_TICKS_PER_FRAME = 1000 / SCREEN_FPS;
@@ -18,7 +17,6 @@ int main( int argc, char* args[] )
 	//The frames per second timer
 	LTimer fpsTimer;
 	LTimer capTimer;
-	std::stringstream timeText;
 
 	printf("snake v.0.1\n");
 	if( Init() ){
@@ -33,12 +31,12 @@ int main( int argc, char* args[] )
  			OnLoop();
  			OnRender();
 
-				//Calculate and correct fps
-				avgFPS = countedFrames / ( fpsTimer.getTicks() / 1000.f );
-				if( avgFPS > 2000000 )
-				{
-					avgFPS = 0;
-				}
+			//Calculate and correct fps
+			avgFPS = countedFrames / ( fpsTimer.getTicks() / 1000.f );
+			if( avgFPS > 2000000 )
+			{
+				avgFPS = 0;
+			}
 
 			++countedFrames;
 			int frameTicks = capTimer.getTicks();
