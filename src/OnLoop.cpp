@@ -73,8 +73,15 @@ void OnLoop() {
 		case e_GS_Game:
 			MoveWorm();
 			CheckForCollition();
-			
 			break;
+		case e_GS_GameOver:
+			snake->highScoreIndex = CheckForHighScore(snake->score);
+			if( snake->highScoreIndex >= 0 ){
+				gameState = e_GS_NewHighScore;
+			}
+			break;
+		case e_GS_NewHighScore:
+		break;
 		case e_GS_NextLevel:
 			
 			break;

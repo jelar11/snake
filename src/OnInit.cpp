@@ -1,4 +1,5 @@
 #include "globals.h"
+#include "functions.h"
 
 bool LoadMedia()
 {
@@ -7,6 +8,8 @@ bool LoadMedia()
 			return false;
 		}
 	}
+
+	LoadHighScore();
 
 	return true;
 }
@@ -49,10 +52,12 @@ bool Init()
 
 void CleanUp()
 {
+	SaveHighScore();
+
 	for( int i=0; i<e_FS_LastEnum; i++ ){
 		TTF_CloseFont( fonts[i] );
 	}
-	
+
 	 TTF_Quit();
 	 IMG_Quit();
 	 SDL_Quit();

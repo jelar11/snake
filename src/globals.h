@@ -34,8 +34,14 @@ int gameState;
 int menuState;
 bool running;
 bool showDebug;
-std::string highScore[6];
+
 float avgFPS;
+struct HighScoreItem {
+	char name[16];
+	int score;
+};
+
+HighScoreItem highScore[6];
 
 enum FontSizes {
 	e_FS_14 = 0,
@@ -64,7 +70,8 @@ struct Snake {
 		score(0),
 		velocity(2),
 		dir(e_DI_Stop),
-		nextCoint(0)
+		nextCoint(0),
+		highScoreIndex(-1)
 		{}
 
 	int x, y;
@@ -73,6 +80,7 @@ struct Snake {
 	int velocity;
 	Direction dir;
 	int nextCoint;
+	int highScoreIndex;
 };
 
 Snake *snake;
@@ -85,11 +93,12 @@ enum GameState {
 	e_GS_GameOver,
 	e_GS_Pause,
 	e_GS_HighScore,
+	e_GS_NewHighScore,
 
 	e_GS_LastEnum
 
 };
-static const char * GameState_str[] ={"menu", "ready", "game", "nextLevel", "gameover", "pause", "highscore"};
+static const char * GameState_str[] ={"menu", "ready", "game", "nextLevel", "gameover", "pause", "highscore", "newhighscore"};
 
 enum MenuStates {
 	e_MS_StartGame = 0,

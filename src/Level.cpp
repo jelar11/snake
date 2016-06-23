@@ -12,7 +12,7 @@ void GenerateLevel() {
 		cordinates[i][iX] = rand() % BOARD_WIDTH;
 		cordinates[i][iY] = rand() % BOARD_HEIGHT;
 
-		printf("Coor[%d]: (%d,%d) \n", i, cordinates[i][iX], cordinates[i][iY] );
+//		printf("Coor[%d]: (%d,%d) \n", i, cordinates[i][iX], cordinates[i][iY] );
 	}
 
 }

@@ -5,7 +5,8 @@ S_DIR=src
 
 OBJ=LTimer.o
 
-COMPILER_FLAGS = -g -Wall
+
+COMPILER_FLAGS = -g -Wall -Wunused
 LINKER_FLAGS = -lSDL2 -lSDL2_image -lSDL2_ttf
 # -lSDL2main -Wl,-Bdynamic -lpthread
 DIRS_TO_SEARCH = -I S_DIR

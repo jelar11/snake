@@ -145,29 +145,37 @@ void DrawMenu() {
 	}
 }
 
-void DrawHighScore() {
+void DrawHighScore(int index = -1) {
 	int x = SCREEN_WIDTH/2;
 	int y = 80;
 	DrawText(x, y, "HighScore", true, e_FS_16, e_C_Blue );
 	y += 18;
-	DrawText(x, y, "-------------------", true, e_FS_16 );
+	DrawText(x, y, "----------------------", true, e_FS_16 );
 	y += 18;
-	x -= 90;
-	std::string str;
+
+	std::string str, name;
+	int score;
 	for( int i=0; i<6; i++ ){
-		int pos = highScore[i].find(",");
-		std::string name = highScore[i].substr(0, pos);
-		int score = atoi( highScore[i].substr(pos +1, highScore[i].length() ).c_str() );
-		if( name.empty() )
-			str = str_format("%d. ---", i +1 );
-		else
-			str = str_format("%d. %s      %d", i +1, name.c_str(), score );
-		DrawText(x, y, str, false, e_FS_16);
+		if( i != index ){
+			name = (strlen(highScore[i].name) > 0)	? highScore[i].name		: "---";
+			score = (highScore[i].score > 0)		? highScore[i].score	: 0;
+
+			str = str_format("%d. %-6s      %4d", i +1, name.c_str(), score );
+			DrawText(x, y, str, true, e_FS_16);
+		}
 		y += 18;
 	}
 	y += 18;
 	x = SCREEN_WIDTH/2;
 	DrawText(x, y, "> Back <", true, e_FS_16, e_C_Yellow );
+
+	if( index >= 0 ){
+		y = 80 +18+18 + (18 *index);
+		static int blink = 0;
+		( blink >= 20 ? blink = 0 : blink++);
+		str = str_format("%d. %-6s      %4d", index +1, "_", snake->score );
+		DrawText(x, y, str, true, e_FS_16, (blink > 10 ? e_C_Red : e_C_Yellow ) );
+	}
 }
 
 void DrawGameOVer() {
@@ -210,6 +218,9 @@ void OnRender() {
 				gameState = e_GS_Game;
 			}else
 				DrawGameOVer();
+		break;
+		case e_GS_NewHighScore:
+			DrawHighScore(snake->highScoreIndex);
 		break;
 		case e_GS_NextLevel:
 		break;
