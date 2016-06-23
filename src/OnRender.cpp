@@ -31,6 +31,7 @@ void DrawDebugText() {
 	lines.push_back( str_format("Pos (x,y): %d, %d", snake->x, snake->y) );
 	lines.push_back( str_format("Velocity: %d", snake->velocity) );
 	lines.push_back( str_format("Direction: %s", Direction_str[snake->dir]) );
+	lines.push_back( str_format("Coin: [%d](%d,%d)", snake->nextCoint, cordinates[snake->nextCoint][iX], cordinates[snake->nextCoint][iY] ) );
 
 	SDL_Surface* txtSurf;
 	int w = 0;

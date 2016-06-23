@@ -93,5 +93,5 @@ void OnLoop() {
 			gameState = e_GS_Menu;
 			break;
 	}
-
+	SDL_ShowCursor( (showDebug ? SDL_ENABLE : SDL_DISABLE) );
 }

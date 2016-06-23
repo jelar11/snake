@@ -30,6 +30,7 @@ void OnEvent() {
 			running = false;
 		}
 
+        const unsigned char* keys = SDL_GetKeyboardState(NULL);
 
 		if( event.type == SDL_KEYDOWN ){
 			switch( event.key.keysym.sym ){
@@ -70,11 +71,14 @@ void OnEvent() {
 				case SDLK_d:	showDebug = !showDebug;			break;
 
 				case SDLK_j:	snake->x = SCREEN_WIDTH /2;
-								snake->y = SCREEN_HEIGHT /2;		break;
+								snake->y = SCREEN_HEIGHT /2;	break;
+
+				case SDLK_n:	((keys[SDL_SCANCODE_RSHIFT] || keys[SDL_SCANCODE_RSHIFT]) ? snake->nextCoint-- : snake->nextCoint++);	break;
 
 				case SDLK_SPACE:
 				case SDLK_p:	PauseGame();					break;
-				case SDLK_s:	gameState++;					break;
+				case SDLK_s:	((keys[SDL_SCANCODE_RSHIFT] || keys[SDL_SCANCODE_RSHIFT]) ? gameState-- : gameState++);					break;
+
 					
 				case SDLK_PLUS:		snake->velocity++;			break;
 				case SDLK_MINUS:	snake->velocity--;			break;
