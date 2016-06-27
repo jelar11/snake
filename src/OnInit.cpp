@@ -1,5 +1,4 @@
-#include "globals.h"
-#include "functions.h"
+#include "highScore.h"
 
 bool LoadMedia()
 {

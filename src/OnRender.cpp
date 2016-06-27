@@ -1,7 +1,9 @@
 #include <vector>
 #include <stdarg.h>
 #include "functions.h"
+#include "highScore.h"
 
+HighScoreItem highScore[6];	// Needed for the score to work, extern from highscore.h
 
 void DrawText(int x, int y, std::string str, bool centerH=false, FontSizes fontSize=e_FS_14, Colors color=e_C_White) {
 

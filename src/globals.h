@@ -36,12 +36,7 @@ bool running;
 bool showDebug;
 
 float avgFPS;
-struct HighScoreItem {
-	char name[16];
-	int score;
-};
 
-HighScoreItem highScore[6];
 
 enum FontSizes {
 	e_FS_14 = 0,
