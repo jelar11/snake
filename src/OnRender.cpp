@@ -35,6 +35,10 @@ void DrawDebugText() {
 	lines.push_back( str_format("Direction: %s", Direction_str[snake->dir]) );
 	lines.push_back( str_format("Coin: [%d](%d,%d)", snake->nextCoint, cordinates[snake->nextCoint][iX], cordinates[snake->nextCoint][iY] ) );
 
+	SDL_Point cursor;
+	SDL_GetMouseState( &cursor.x, &cursor.y);
+	lines.push_back( str_format("Cursor (x,y): %d, %d", cursor.x, cursor.y) );
+
 	SDL_Surface* txtSurf;
 	int w = 0;
 	int x = 20;
