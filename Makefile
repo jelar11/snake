@@ -23,5 +23,12 @@ DIRS_TO_SEARCH = -I S_DIR/include
 all:
 	$(CXX) ${S_DIR}/main.cpp ${COMPILER_FLAGS} ${LINKER_FLAGS} -o ${B_DIR}/${P_NAME}
 
+setup:
+	mkdir -p ${B_DIR}
+
 clean:
 	rm -Rf ${B_DIR}/*
+
+
+run: all
+	${B_DIR}/${P_NAME}
