@@ -9,7 +9,7 @@ enum Colors {
 	e_C_Green	= 0x00FF00,
 	e_C_Blue	= 0x0000FF,
 	e_C_Gray	= 0x808080,
-	e_C_Orange	= 0xFFA500,
+	e_C_Orange	= 0xFF9900,
 	e_C_White	= 0xFFFFFF,
 	e_C_Back	= 0x221F1E
 };

@@ -48,6 +48,13 @@ void DrawDebugText() {
 	lines.push_back( str_format("State: %s", GameState_str[state]) );
 	lines.push_back( str_format("Pos (x,y): %d, %d", snake.x, snake.y) );
 	lines.push_back( str_format("Velocity: %d", snake.velocity) );
+	lines.push_back( str_format("Tail Len: %d", snake.tailLen) );
+
+	for( int i=0; i<20; i++){
+		lines.push_back( str_format("Tail: (%d, %d) %s", snake.tailx[i], snake.taily[i], Direction_str[ snake.tailD[i] ] ) );
+//		lines.push_back( str_format("Tail [%d]: (%d)%s", i, snake.tailD[i],  Direction_str[ snake.tailD[i] ] ) );
+//		lines.push_back( str_format("Tail [%d]: %d", i,  snake.tailD[i] ) );
+	}
 
 	SDL_Surface* txtSurf = TTF_RenderText_Solid( debugFont, "Txt", Color(e_C_Orange) );
 	int h = txtSurf->h;
@@ -94,10 +101,38 @@ void DrawLeve() {
 }
 
 void DrawWorm() {
+
+	// draw worm
 	SDL_Rect fillRect = { snake.x -5, snake.y -5, 10, 10 };
-	SetColor( e_C_Red );
-    SDL_RenderFillRect( gRenderer, &fillRect );
-	
+	SetColor( e_C_Red);
+	SDL_RenderFillRect( gRenderer, &fillRect );
+
+	// draw tail
+	int x = snake.tailx[0];
+	int y = snake.taily[0];
+	// makes sure the head moves before the tail.
+	if( snake.invalid ){
+		snake.invalid = false;
+		snake.tailx[0] = x = snake.x -2;
+		snake.taily[0] = y = snake.y;
+	}
+
+	SetColor( e_C_Blue );
+	for( int i=1; i<snake.tailLen; i++){
+		switch( snake.tailD[i] ){
+			case e_DI_Left:		x += 10;	break;
+			case e_DI_Right:	x -= 10;	break;
+			case e_DI_Up:		y += 10;	break;
+			case e_DI_Down:		y -= 10;	break;
+			default: break;
+		}
+		snake.tailx[i] = x;
+		snake.taily[i] = y;
+		SDL_Rect fillRect = {x -4, y -4, 8, 8 };
+		SDL_RenderFillRect( gRenderer, &fillRect );
+	}
+
+	// debug spot
 	SetColor( e_C_Blue );
 	SDL_RenderDrawPoint(gRenderer, snake.x, snake.y);
 }
@@ -117,7 +152,7 @@ void OnRender() {
 
 	// draw Debug text
 	if( showDebug ){
-		DrawDebugText();	
+		DrawDebugText();
 	}
     // Update screen
     SDL_RenderPresent( gRenderer );

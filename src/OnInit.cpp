@@ -42,10 +42,20 @@ bool Init()
 	snake.y = SCREEN_HEIGHT /2;
 	snake.lives = 3;
 	snake.score = 0;
-	snake.velocity = 2;
+	snake.velocity = 1;
 	snake.dir = e_DI_Stop;
-    
-    return true;
+
+	snake.tailLen = 20;
+	for(int i=0; i<snake.tailLen; i++ ){
+		snake.tailD[i] = e_DI_Right;
+	}
+	snake.tailD[4] = e_DI_Down;
+	snake.tailD[5] = e_DI_Down;
+	snake.tailD[6] = e_DI_Down;
+
+	snake.invalid = true;
+
+	return true;
 }
 
 

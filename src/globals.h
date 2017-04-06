@@ -15,7 +15,7 @@ const int SCREEN_WIDTH  = 640;
 const int SCREEN_HEIGHT = 480;
 const int BOARD_WIDTH = SCREEN_WIDTH - 8;
 const int BOARD_HEIGHT = SCREEN_HEIGHT - 45;
-const int DELAY = 10;
+const int DELAY = 30;
 
 
 SDL_Window    *gWindow;
@@ -35,12 +35,20 @@ enum Direction {
 	e_DI_Stop
 };
 
+static const char * Direction_str[] = { "Up", "Down", "Left", "Right", "Stop" };
+
+
 struct Snake {
 	int x, y;
 	int lives;
 	int score;
 	int velocity;
 	Direction dir;
+	int tailLen;
+	Direction tailD[20];
+	int tailx[20];
+	int taily[20];
+	bool invalid;
 };
 
 static Snake snake;

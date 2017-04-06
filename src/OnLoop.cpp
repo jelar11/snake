@@ -1,4 +1,5 @@
 
+
 void MoveWorm() {
 
 	switch( snake.dir ){
@@ -8,6 +9,24 @@ void MoveWorm() {
 		case e_DI_Right:	snake.x += snake.velocity;	break;
 		case e_DI_Stop:		break;
 	}
+
+	static int prevX = snake.x;
+	static int prevY = snake.y;
+
+	int diffX = abs( (prevX) -snake.x);
+	int diffY = abs( (prevY) -snake.y);
+	if( diffX >= 10 || diffY >= 10 ){
+		prevX = snake.x;
+		prevY = snake.y;
+		for( int i=snake.tailLen; i>0; i-- ){
+			snake.tailD[i] = snake.tailD[i -1];
+		}
+		snake.tailD[0] = snake.dir;
+//		snake.tailLen++;
+		snake.invalid = true;
+	}
+
+
 }
 
 void Dead() {
@@ -69,5 +88,4 @@ void OnLoop() {
 			state = e_GS_Menu;
 			break;
 	}
-
 }
