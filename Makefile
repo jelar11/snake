@@ -18,6 +18,8 @@ all: ${OBJ}
 LTimer.o:
 	${CXX} ${COMPILER_FLAGS} -c ${S_DIR}/LTimer/LTimer.cpp -o ${B_DIR}/LTimer.o
 
+setup:
+	mkdir -p ${B_DIR}
 
 clean:
 	rm -Rf ${B_DIR}/*

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include <stack>
 
 // SDL
 #include <SDL2/SDL.h>
@@ -18,6 +19,7 @@ const int BOARD_WIDTH = SCREEN_WIDTH - 2;
 const int BOARD_HEIGHT = SCREEN_HEIGHT - 22;
 const int BOARD_X = 1;
 const int BOARD_Y = 21;
+const int BOARD_BORDER = 4;
 const int DELAY = 10;
 
 
@@ -58,6 +60,16 @@ enum Direction {
 
 static const char * Direction_str[] = { "Up", "Down", "Left", "Right", "Stop"};
 
+struct Point
+{
+	Point(int X, int Y):
+		x(X),
+		y(Y)
+		{}
+
+	int x, y;
+};
+
 struct Snake {
 	Snake():
 		x(SCREEN_WIDTH /2), y(SCREEN_WIDTH/2),
@@ -66,7 +78,8 @@ struct Snake {
 		velocity(2),
 		dir(e_DI_Stop),
 		nextCoint(0),
-		highScoreIndex(-1)
+		highScoreIndex(-1),
+		tail_size(3)
 		{}
 
 	int x, y;
@@ -76,6 +89,8 @@ struct Snake {
 	Direction dir;
 	int nextCoint;
 	int highScoreIndex;
+	int tail_size;
+	std::deque<Point> tail;
 };
 
 Snake *snake;

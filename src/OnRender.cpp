@@ -82,14 +82,14 @@ void DrawTopArea() {
 
 void DrawLeve() {
 	// Draws the outer border
-	DrawBox(BOARD_X, BOARD_Y, BOARD_WIDTH, BOARD_HEIGHT, 4, e_C_Orange);
+	DrawBox(BOARD_X, BOARD_Y, BOARD_WIDTH, BOARD_HEIGHT, BOARD_BORDER, e_C_Orange);
 
 	// Draw random coints
-	int x, y;
-	int i = snake->nextCoint;
+	const int i = snake->nextCoint;
+	const int x = cordinates[i][iX] + BOARD_X + BOARD_BORDER;
+	const int y = cordinates[i][iY] + BOARD_Y + BOARD_BORDER;
+
 	SetColor( e_C_Yellow );
-	x = cordinates[i][iX] + BOARD_X;
-	y = cordinates[i][iY] + BOARD_Y;
 	SDL_Rect first = { x, y, 5, 5 };
 	SDL_RenderFillRect( gRenderer, &first );
 
@@ -106,28 +106,20 @@ void DrawWormSimple() {
 }
 
 void DrawWorm() {
-	SDL_Rect fillRect = { snake->x -5, snake->y -5, 10, 10 };
 	SetColor( e_C_Blue );
-	SDL_RenderFillRect( gRenderer, &fillRect );
 
-	SetColor( e_C_Red );
-	int x = snake->x;
-	int y = snake->y;
-	for( int i=0; i<10; i++ ){
-		switch( snake->dir ){
-			case e_DI_Right:	x -= 12;	break;
-			case e_DI_Left:		x += 12;	break;
-			case e_DI_Up:		y += 12;	break;
-			case e_DI_Down:		y -= 12;	break;
-			default:	break;
-		}
-
+	for( size_t i=0; i<snake->tail.size(); i++ )
+	{
+		int x = snake->tail[i].x;
+ 		int y = snake->tail[i].y;
 		SDL_Rect r = { x -5, y -5, 10, 10 };
 		SDL_RenderFillRect( gRenderer, &r );
 	}
 
-	SetColor( e_C_Yellow );
-	SDL_RenderDrawPoint(gRenderer, snake->x, snake->y);
+	SDL_Rect fillRect = { snake->x -5, snake->y -5, 10, 10 };
+	SetColor( e_C_Red);
+	SDL_RenderFillRect( gRenderer, &fillRect );
+
 }
 
 void DrawMenu() {

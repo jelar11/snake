@@ -1,5 +1,26 @@
 #include "Level.cpp"
 
+bool MovedOneCell()
+{
+	static int lastCellX = 0;
+	static int lastCellY = 0;
+
+	if( lastCellX == 0 && lastCellY == 0)
+	{
+		lastCellX = snake->x;
+		lastCellY = snake->y;
+	}
+
+	if( std::abs(snake->x - lastCellX) >= 12 || std::abs(snake->y - lastCellY) >= 12 )
+	{
+		lastCellX = snake->x;
+		lastCellY = snake->y;
+		return true;
+	}
+
+	return false;
+}
+
 void MoveWorm() {
 
 	switch( snake->dir ){
@@ -8,6 +29,13 @@ void MoveWorm() {
 		case e_DI_Left:		snake->x -= snake->velocity;	break;
 		case e_DI_Right:	snake->x += snake->velocity;	break;
 		case e_DI_Stop:		break;
+	}
+
+	if( MovedOneCell() )
+	{
+		snake->tail.push_back(Point(snake->x, snake->y));
+		if( (int)snake->tail.size() > snake->tail_size )
+			snake->tail.pop_front();
 	}
 
 }
@@ -40,8 +68,8 @@ void CheckForCollition() {
 		Dead();
 	}
 
-	int x = cordinates[ snake->nextCoint ][iX] + BOARD_X;
-	int y = cordinates[ snake->nextCoint ][iY] + BOARD_Y;
+	const int x = cordinates[ snake->nextCoint ][iX] + BOARD_X;
+	const int y = cordinates[ snake->nextCoint ][iY] + BOARD_Y;
 
 	if( ((snake->x +5) >= x && (snake->x -5) <= (x +5)) &&
 		((snake->y +5) >= y && (snake->y -5) <= (y +5))
@@ -51,7 +79,9 @@ void CheckForCollition() {
 			gameState = e_GS_NextLevel;
 		}
 		snake->score += 10;
-		if( (snake->score % 20) == 0 ){
+		snake->tail_size++;
+		if( (snake->score % 4) == 0 )
+		{
 			snake->velocity++;
 		}
 	}

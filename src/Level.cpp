@@ -1,18 +1,36 @@
 #include "functions.h"
 #include "globals.h"
 #include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
 
 const int n = 10;
 int cordinates[n][2];
 
-void GenerateLevel() {
-
-
-	for( int i=0; i<=n-1; i++ ){
-		cordinates[i][iX] = rand() % BOARD_WIDTH;
-		cordinates[i][iY] = rand() % BOARD_HEIGHT;
-
-//		printf("Coor[%d]: (%d,%d) \n", i, cordinates[i][iX], cordinates[i][iY] );
+bool WithinBoard(int x, int y)
+{
+	bool res = false;
+	if( (x >= 0 && x <= BOARD_WIDTH) &&
+		(y >= 0 && y <= BOARD_HEIGHT))
+	{
+		res = true;
 	}
+	return res;
+}
+
+void GenerateLevel() {
+	int i = 0;
+
+	srand (time(NULL));
+	do{
+		int x = rand() % BOARD_WIDTH;
+		int y = rand() % BOARD_HEIGHT;
+
+		if( WithinBoard(x, y) )
+		{
+			cordinates[i][iX] = x;
+			cordinates[i][iY] = y;
+			i++;
+		}
+	}while( i < 10);
 
 }

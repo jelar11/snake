@@ -3,7 +3,8 @@
 bool LoadMedia()
 {
 	for( int i=0; i<e_FS_LastEnum; i++ ){
-		if( (fonts[ i ] = TTF_OpenFont( "/usr/share/fonts/truetype/msttcorefonts/Courier_New_Bold.ttf", FontSizes_nums[i])) == NULL ){
+		if( (fonts[ i ] = TTF_OpenFont( "Fonts/Courier_New_Bold.ttf", FontSizes_nums[i])) == NULL ){
+			std::cout << "Init font error.\n";
 			return false;
 		}
 	}
